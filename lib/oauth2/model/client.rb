@@ -2,7 +2,7 @@ module OAuth2
   module Model
     
     class Client < ActiveRecord::Base
-      set_table_name :oauth2_clients
+      self.table_name = :oauth2_clients
       
       belongs_to :oauth2_client_owner, :polymorphic => true
       alias :owner  :oauth2_client_owner
@@ -14,7 +14,7 @@ module OAuth2
       validates_presence_of   :name, :redirect_uri
       validate :check_format_of_redirect_uri
       
-      attr_accessible :name, :redirect_uri
+      # attr_accessible :name, :redirect_uri
       
       before_create :generate_credentials
       
